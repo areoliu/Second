@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderDao {
 
-    @Insert("insert into order(uid,order_id)values(#{uid},#{orderId})")
+    @Insert("insert into orders(uid,order_id)values(#{uid},#{orderId})")
     public int insert(Order order);
 }

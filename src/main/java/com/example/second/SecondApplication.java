@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.example.second.*")
+@MapperScan(basePackages= {"com.example.second.dao","com.example.second.controller"})
 public class SecondApplication {
 
 	public static void main(String[] args) {
