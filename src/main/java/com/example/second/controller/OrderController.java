@@ -2,6 +2,7 @@ package com.example.second.controller;
 
 import com.example.second.entity.*;
 import com.example.second.service.OrderService;
+import com.example.second.service.StockService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    StockService stockService;
+
     @PostMapping(value = "order/createOrder")
     public Map<String,Object> createOrder(@RequestBody HttpRequest httpRequest){
         Map<String, Object> responseMap = new HashMap<String, Object>();
@@ -31,6 +35,7 @@ public class OrderController {
         Order order=gson.fromJson(str,Order.class);
         orderService.createOrder(order);
         System.out.println(order);
+        stockService.updateStock(order.getOrderAmout(),order.getOrderSku());
         responseBody.setResultCode("S00001");
         responseBody.setResultMessage("succeed!");
         responseHead.setToken("");

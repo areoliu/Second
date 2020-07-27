@@ -16,7 +16,7 @@ public class Order {
 
     private String orderSku;
 
-    private String orderAmout;
+    private int orderAmout;
 
     private double orderPrice;
 

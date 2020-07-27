@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StockDao {
 
-    @Update("update stock set stock_amout=stock_amout-1 where id=#{id} and stock_amout>0")
-    public boolean updateStock(Stock Stock);
+    @Update("update stock set stock_amout=stock_amout-#{buys} where stock_sku=#{stockSku} and stock_amout>#{buys}")
+    public boolean updateStock(int buys,String stockSku);
 }
