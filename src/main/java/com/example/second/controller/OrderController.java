@@ -1,12 +1,11 @@
 package com.example.second.controller;
 
+import com.example.api.service.StockService;
 import com.example.second.entity.*;
 import com.example.second.service.OrderService;
-import com.example.second.service.StockService;
 import com.google.gson.Gson;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +21,7 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @Autowired
+    @Reference(version="1.0.0")
     StockService stockService;
 
     @PostMapping(value = "order/createOrder")
