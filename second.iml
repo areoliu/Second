@@ -66,7 +66,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
         <CLASSES>
-          <root url="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/jconsole.jar!/" />
+          <root url="jar://C:/Program Files/Java/jdk1.8.0_211/lib/jconsole.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -75,7 +75,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:tools:1.8.0">
         <CLASSES>
-          <root url="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/tools.jar!/" />
+          <root url="jar://C:/Program Files/Java/jdk1.8.0_211/lib/tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -106,7 +106,11 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient:0.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.alibaba.csp:sentinel-core:1.7.2" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba.csp:sentinel-apache-dubbo-adapter:1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba.csp:sentinel-core:1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba.csp:sentinel-transport-simple-http:1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba.csp:sentinel-transport-common:1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba.csp:sentinel-datasource-extension:1.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:2.3.0.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:2.3.0.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:2.3.0.RELEASE" level="project" />
