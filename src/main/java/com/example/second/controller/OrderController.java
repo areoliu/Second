@@ -1,6 +1,5 @@
 package com.example.second.controller;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.example.api.service.StockService;
 import com.example.second.entity.*;
 import com.example.second.service.OrderService;
@@ -27,6 +26,7 @@ public class OrderController {
 
 
     @PostMapping(value = "order/createOrder")
+//    @SentinelResource("createOrder")
     public Map<String,Object> createOrder(@RequestBody HttpRequest httpRequest){
         Map<String, Object> responseMap = new HashMap<String, Object>();
         HttpResponseBody responseBody = new HttpResponseBody();
@@ -34,7 +34,7 @@ public class OrderController {
         Gson gson=new Gson();
         String str=gson.toJson(httpRequest.getRequestBody().getRequestData());
         Order order=gson.fromJson(str,Order.class);
-//        orderService.createOrder(order);
+        orderService.createOrder(order);
         if(stockService.updateStock(order.getOrderAmout(),order.getOrderSku())){
             responseBody.setResultCode("S00001");
             responseBody.setResultMessage("succeed!");
