@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 @EnableDubbo
-@MapperScan(basePackages= {"com.example.second.dao","com.example.second.controller"})
+@MapperScan(basePackages= {"com.example.second.dao","com.example.second.controller","com.example.second.config"})
 public class SecondApplication {
 
 	public static void main(String[] args) {
