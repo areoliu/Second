@@ -34,8 +34,8 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-//    @Reference(version="1.0.0")
-//    StockService stockService;
+    @Reference(version="1.0.0")
+    StockService stockService;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -72,22 +72,23 @@ public class OrderController {
             if(stockValue!=null && stockValueNow>buys){
                 orderService.createOrder(order);
                 stringRedisTemplate.opsForValue().set(KEY,stockValueNow-buys+"");
-                message.setMsgId(UUID.randomUUID().toString());
-                message.setMsgText(JSONObject.toJSON(order).toString());
-                msgProducer.sendMsg(message);
-                responseBody.setResultCode("S00001");
-                responseBody.setResultMessage("succeed!");
+//                message.setMsgId(UUID.randomUUID().toString());
+//                message.setMsgText(JSONObject.toJSON(order).toString());
+//                msgProducer.sendMsg(message);
+////                stringRedisTemplate.opsForValue().set(order.getId()+"","true");
+//                responseBody.setResultCode("S00001");
+//                responseBody.setResultMessage("succeed!");
                 //System.out.println("succeed");
-//                if(stockService.updateStock(order.getOrderAmout(),order.getOrderSku())){
-//                    responseBody.setResultCode("S00001");
-//                    responseBody.setResultMessage("succeed!");
-//                    System.out.println("succeed");
-//                }
-//                else{
-//                    responseBody.setResultCode("F00001");
-//                    responseBody.setResultMessage("failed!");
-//                    System.out.println("failed");
-//                }
+                if(stockService.updateStock(order.getOrderAmout(),order.getOrderSku())){
+                    responseBody.setResultCode("S00001");
+                    responseBody.setResultMessage("succeed!");
+                    System.out.println("succeed");
+                }
+                else{
+                    responseBody.setResultCode("F00001");
+                    responseBody.setResultMessage("failed!");
+                    System.out.println("failed");
+                }
             }
 //            else if(stockValue==null){
 //                stockValue = stockService.queryStock()+"";
