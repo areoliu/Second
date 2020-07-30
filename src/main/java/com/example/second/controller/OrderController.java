@@ -1,5 +1,6 @@
 package com.example.second.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.api.service.StockService;
 import com.example.second.config.MsgProducer;
 import com.example.second.entity.*;
@@ -72,7 +73,7 @@ public class OrderController {
                 orderService.createOrder(order);
                 stringRedisTemplate.opsForValue().set(KEY,stockValueNow-buys+"");
                 message.setMsgId(UUID.randomUUID().toString());
-                message.setMsgText(gson.toJson(order));
+                message.setMsgText(JSONObject.toJSON(order).toString());
                 msgProducer.sendMsg(message);
                 responseBody.setResultCode("S00001");
                 responseBody.setResultMessage("succeed!");
