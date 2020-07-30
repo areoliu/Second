@@ -1,11 +1,13 @@
 package com.example.second.controller;
 
 import com.example.api.service.StockService;
+import com.example.second.config.MsgProducer;
 import com.example.second.entity.*;
 import com.example.second.service.OrderService;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -30,14 +33,18 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @Reference(version="1.0.0")
-    StockService stockService;
+//    @Reference(version="1.0.0")
+//    StockService stockService;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     private RedissonClient redissonClient;
+
+    @Autowired
+    private MsgProducer msgProducer;
+
 
     private String KEY="STOCK";
     private String LOCK_KEY="LOCK_KEY";
@@ -59,41 +66,46 @@ public class OrderController {
             int buys=order.getOrderAmout();
             int stockValueNow=Integer.parseInt(stockValue);
             log.info(Thread.currentThread().getName()+" now stock is "+stockValue);
+            QueueMessage message = new QueueMessage();
 
             if(stockValue!=null && stockValueNow>buys){
                 orderService.createOrder(order);
                 stringRedisTemplate.opsForValue().set(KEY,stockValueNow-buys+"");
-
+                message.setMsgId(UUID.randomUUID().toString());
+                message.setMsgText(gson.toJson(order));
+                msgProducer.sendMsg(message);
+                responseBody.setResultCode("S00001");
+                responseBody.setResultMessage("succeed!");
                 //System.out.println("succeed");
-                if(stockService.updateStock(order.getOrderAmout(),order.getOrderSku())){
-                    responseBody.setResultCode("S00001");
-                    responseBody.setResultMessage("succeed!");
-                    System.out.println("succeed");
-                }
-                else{
-                    responseBody.setResultCode("F00001");
-                    responseBody.setResultMessage("failed!");
-                    System.out.println("failed");
-                }
+//                if(stockService.updateStock(order.getOrderAmout(),order.getOrderSku())){
+//                    responseBody.setResultCode("S00001");
+//                    responseBody.setResultMessage("succeed!");
+//                    System.out.println("succeed");
+//                }
+//                else{
+//                    responseBody.setResultCode("F00001");
+//                    responseBody.setResultMessage("failed!");
+//                    System.out.println("failed");
+//                }
             }
-            else if(stockValue==null){
-                stockValue = stockService.queryStock()+"";
-                stringRedisTemplate.opsForValue().set(KEY,stockValueNow-buys+"");
-                orderService.createOrder(order);
+//            else if(stockValue==null){
+//                stockValue = stockService.queryStock()+"";
+//                stringRedisTemplate.opsForValue().set(KEY,stockValueNow-buys+"");
+//                orderService.createOrder(order);
 //                responseBody.setResultCode("S00001");
 //                responseBody.setResultMessage("succeed!");
-                //System.out.println("succeed");
-                if(stockService.updateStock(order.getOrderAmout(),order.getOrderSku())){
-                    responseBody.setResultCode("S00001");
-                    responseBody.setResultMessage("succeed!");
-                    System.out.println("succeed");
-                }
-                else{
-                    responseBody.setResultCode("F00001");
-                    responseBody.setResultMessage("failed!");
-                    System.out.println("failed");
-                }
-            }
+////                //System.out.println("succeed");
+////                if(stockService.updateStock(order.getOrderAmout(),order.getOrderSku())){
+////                    responseBody.setResultCode("S00001");
+////                    responseBody.setResultMessage("succeed!");
+////                    System.out.println("succeed");
+////                }
+////                else{
+////                    responseBody.setResultCode("F00001");
+////                    responseBody.setResultMessage("failed!");
+////                    System.out.println("failed");
+////                }
+//            }
             else{
                 responseBody.setResultCode("F00002");
                 responseBody.setResultMessage("failed!stock is not enough");
