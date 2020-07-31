@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../Api/api.iml" filepath="$PROJECT_DIR$/../Api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../gateway/gateway.iml" filepath="$PROJECT_DIR$/../gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/second.iml" filepath="$PROJECT_DIR$/second.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Stock/stock.iml" filepath="$PROJECT_DIR$/../Stock/stock.iml" />
     </modules>

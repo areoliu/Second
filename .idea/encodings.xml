@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/../Api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../Stock" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../gateway" charset="UTF-8" />
   </component>
 </project>

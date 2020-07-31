@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api" />
         <module name="stock" />
+        <module name="gateway" />
         <module name="second" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="1.8" />
+      <module name="gateway" target="1.8" />
       <module name="second" target="1.8" />
       <module name="stock" target="1.8" />
     </bytecodeTargetLevel>
@@ -20,6 +22,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="second" options="-parameters" />
       <module name="stock" options="-parameters" />
     </option>
