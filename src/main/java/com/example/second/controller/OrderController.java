@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,7 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @Reference(version="1.0.0")
+    @Reference(version = "2.0.0")
     StockService stockService;
 
     @Autowired
@@ -135,6 +136,11 @@ public class OrderController {
 //        }
 //        System.out.print(1/0);
         return responseMap;
+    }
+
+    @GetMapping(value = "order/test")
+    public String test(){
+        return "test now";
     }
 
 }
