@@ -18,19 +18,20 @@ spring.datasource.password: 123456
 spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 
 
-nacos.service-address: 47.75.88.208
-nacos.port: 8848
+#nacos.service-address: 47.75.88.208
+#nacos.port: 8848
 
 # 配置服务信息
 
-dubbo.application.name: dubbo-consumer
-#dubbo.protocol.name: dubbo
-#dubbo.protocol.port:20881
+#dubbo.application.name: dubbo-consumer
+#dubbo.application.id: dubbo-consumer
+dubbo.protocol.name: dubbo
+dubbo.protocol.port: 20881
 # 禁用QOS同一台机器可能会有端口冲突现象
 #dubbo.application.qos-enable: false
 #dubbo.application.qos-accept-foreign-ip: false
 ## 配置注册中心
-dubbo.registry.address: nacos://${nacos.service-address}:${nacos.port}
+dubbo.registry.address: nacos://47.75.88.208:8848
 # 设置超时时间
 dubbo.consumer.timeout: 4000
 spring.main.allow-bean-definition-overriding: true

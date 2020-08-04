@@ -3,11 +3,9 @@ server:
 
 spring:
   application:
-     name: service-consumer
+    name: dubbo-consumer
   main:
     allow-bean-definition-overriding: true
   cloud:
     nacos:
       server-addr: 47.75.88.208:8848
-      username: nacos
-      password: nacos
